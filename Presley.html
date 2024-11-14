@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Distance Problem in TypeScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #007acc;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #66d9ef;
+        }
+        .example {
+            margin-bottom: 20px;
+        }
+        .output {
+            font-weight: bold;
+            color: #007acc;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit Distance Problem</h1>
+
+<p><strong>Problem Statement:</strong></p>
+<p>Given two strings <code>word1</code> and <code>word2</code>, return the minimum number of operations required to convert <code>word1</code> to <code>word2</code>. The permitted operations are:</p>
+<ul>
+    <li>Insert a character</li>
+    <li>Delete a character</li>
+    <li>Replace a character</li>
+</ul>
+
+<div class="example">
+    <p><strong>Example 1:</strong></p>
+    <pre>
+Input:
+  word1 = "horse"
+  word2 = "ros"
+
+Output:
+  3
+
+Explanation:
+  horse -> rorse (replace 'h' with 'r')
+  rorse -> rose (remove 'r')
+  rose -> ros (remove 'e')
+        </pre>
+</div>
+
+<div class="example">
+    <p><strong>Example 2:</strong></p>
+    <pre>
+Input:
+  word1 = "intention"
+  word2 = "execution"
+
+Output:
+  5
+
+Explanation:
+  intention -> inention (remove 't')
+  inention -> enention (replace 'i' with 'e')
+  enention -> exention (replace 'n' with 'x')
+  exention -> exection (replace 'n' with 'c')
+  exection -> execution (insert 'u')
+        </pre>
+</div>
+
+<h2>Solution in TypeScript</h2>
+
+<pre><code>
+function minDistance(word1: string, word2: string): number {
+    const m = word1.length;
+    const n = word2.length;
+    const dp: number[][] = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+    // Initialize the base cases
+    for (let i = 0; i <= m; i++) {
+        dp[i][0] = i;
+    }
+    for (let j = 0; j <= n; j++) {
+        dp[0][j] = j;
+    }
+
+    // Fill the dp table using the recurrence relations
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            if (word1[i - 1] === word2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = Math.min(
+                    dp[i - 1][j] + 1,    // Delete
+                    dp[i][j - 1] + 1,    // Insert
+                    dp[i - 1][j - 1] + 1 // Replace
+                );
+            }
+        }
+    }
+
+    return dp[m][n];
+}
+
+// Test the function
+console.log(minDistance("horse", "ros")); // 3
+console.log(minDistance("intention", "execution")); // 5
+    </code></pre>
+
+<h2>Output:</h2>
+<pre class="output">
+Test Case 1: minDistance("horse", "ros") -> 3
+Test Case 2: minDistance("intention", "execution") -> 5
+    </pre>
+
+<script>
+    // Example usage of the TypeScript code in JavaScript
+    function minDistance(word1, word2) {
+        const m = word1.length;
+        const n = word2.length;
+        const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+        for (let i = 0; i <= m; i++) dp[i][0] = i;
+        for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                if (word1[i - 1] === word2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(
+                        dp[i - 1][j] + 1,
+                        dp[i][j - 1] + 1,
+                        dp[i - 1][j - 1] + 1
+                    );
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
+    // Display the test cases in the console
+    console.log("Test Case 1:", minDistance("horse", "ros")); // Output: 3
+    console.log("Test Case 2:", minDistance("intention", "execution")); // Output: 5
+</script>
+</body>
+</html>
