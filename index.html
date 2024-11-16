@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MASH Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #counter {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #results {
+            margin-top: 30px;
+            font-size: 20px;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #66d9ef;
+        }
+        .output {
+            font-weight: bold;
+            color: #007acc;
+        }
+    </style>
+</head>
+<body>
+<h1>🎲 MASH Game 🎲</h1>
+<p id="counter">Counter: 1</p>
+<button id="stopButton">Stop</button>
+<div id="results"></div>
+
+<h2>Problem Statement:</h2>
+<p>Given predefined categories and options, simulate the classic MASH game where a user stops a counter to decide their "future" by selecting randomized options for each category.</p>
+
+<h2>Solution in TypeScript</h2>
+<pre><code>
+    // Categories
+    const categories = { home, spouse, car, career, kids, salary };
+
+    // Function to eliminate options using a "magic number"
+    function eliminateCategory(options: string[], number: number): string {
+      let index = 0;
+      while (options.length > 1) {
+        index = (index + number - 1) % options.length;
+        options.splice(index, 1);
+      }
+      return options[0];
+    }
+
+    // Counter logic and reset
+    function startCounter() {
+      // Counter and button logic...
+    }
+  </code></pre>
+
+<h2>Input/Output:</h2>
+<pre>Input: Counter stopped at 7</pre>
+<pre class="output">
+    "Home": "Apartment",
+    "Spouse": "Ryan Reynolds",
+    "Car": "Bus",
+    "Career": "Teacher",
+    "Kids": 4,
+    "Salary": "$200,000/year"
+  </pre>
+
+<script src="mash.js"></script>
+</body>
+</html>
