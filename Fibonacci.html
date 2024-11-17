@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fibonacci Counter</title>
+  <style>
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      color: #66d9ef;
+    }
+    .output {
+      font-weight: bold;
+      color: #007acc;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Fibonacci Counter</h1>
+
+<p><strong>Problem Statement:</strong></p>
+<p>Given a user specified integer, n, return the nth fibonacci number:</p>
+
+<h2>Solution in TypeScript</h2>
+
+<pre><code>
+    // Function to calculate the nth Fibonacci number
+function fibonacci(n: number): number {
+    if (n <= 0) {
+        throw new Error("Input must be a positive integer.");
+    }
+
+    // Base cases
+    if (n === 1) return 0;
+    if (n === 2) return 1;
+
+    let a = 0, b = 1, c;
+
+    for (let i = 3; i <= n; i++) {
+        c = a + b; // Fibonacci relation
+        a = b;
+        b = c;
+    }
+
+    return b; // b will hold the nth Fibonacci number at the end
+}
+
+// Function to get input from user and display the result
+function getFibonacciNumber(): void {
+    const input = prompt("Enter the position (n) in the Fibonacci sequence:");
+
+    if (input !== null) {
+        const n = parseInt(input);
+
+        if (isNaN(n) || n <= 0) {
+            console.log("Please enter a valid positive integer.");
+        } else {
+            console.log(`The ${n}th Fibonacci number is: ${fibonacci(n)}`);
+        }
+    } else {
+        console.log("Input was cancelled.");
+    }
+}
+
+// Run the program
+getFibonacciNumber();
+
+    </code></pre>
+
+<h2>Input/Output:</h2>
+<pre>Input: 10</pre>
+<pre class="output">
+"The 10th Fibonacci number is: 34"
+</pre>
+
+</body>
+</html>
