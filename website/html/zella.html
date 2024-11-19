@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>TypeScript Examples</h1>
+
+    <h2>1. Easy Example: Usage of Interfaces and Types</h2>
+    <h3>Code:</h3>
+    <pre><code>
+// Define an interface for a User
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+// Define a type for a list of users
+type UserList = User[];
+
+// Create a variable using the User interface
+const user1: User = {
+  id: 1,
+  name: "Alice",
+  email: "alice@example.com",
+};
+
+// Create a list of users using the UserList type
+const users: UserList = [
+  user1,
+  { id: 2, name: "Bob", email: "bob@example.com" },
+  { id: 3, name: "Charlie", email: "charlie@example.com" },
+];
+
+// Function to display user info
+function displayUsers(users: UserList): void {
+  users.forEach((user) => {
+    console.log(`ID: ${user.id}, Name: ${user.name}, Email: ${user.email}`);
+  });
+}
+
+// Call the function
+displayUsers(users);
+    </code></pre>
+
+    <h3>Expected Output in Terminal:</h3>
+    <pre><code>
+ID: 1, Name: Alice, Email: alice@example.com
+ID: 2, Name: Bob, Email: bob@example.com
+ID: 3, Name: Charlie, Email: charlie@example.com
+    </code></pre>
+
+    <h2>2. Medium Example: Usage of Storage Containers with Generic Type &lt;T&gt;</h2>
+    <h3>Code:</h3>
+    <pre><code>
+// Generic storage container
+class StorageContainer<T> {
+  private items: T[] = [];
+
+  // Add an item to the storage
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  // Get all items
+  getAll(): T[] {
+    return this.items;
+  }
+
+  // Get an item by index
+  get(index: number): T | undefined {
+    return this.items[index];
+  }
+}
+
+// Create a storage container for numbers
+const numberStorage = new StorageContainer<number>();
+numberStorage.add(1);
+numberStorage.add(2);
+numberStorage.add(3);
+console.log("Number Storage:", numberStorage.getAll());
+
+// Create a storage container for strings
+const stringStorage = new StorageContainer<string>();
+stringStorage.add("TypeScript");
+stringStorage.add("Generics");
+console.log("String Storage:", stringStorage.getAll());
+
+// Example of using get
+console.log("First String:", stringStorage.get(0));
+    </code></pre>
+
+    <h3>Expected Output in Terminal:</h3>
+    <pre><code>
+Number Storage: [ 1, 2, 3 ]
+String Storage: [ 'TypeScript', 'Generics' ]
+First String: TypeScript
+    </code></pre>
+</body>
+</html>
