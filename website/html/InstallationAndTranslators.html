@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Installation Instructions</title>
+</head>
+<body>
+    <h1>TypeScript Installation Instructions</h1>
+    
+    <ol>
+        <li>
+            <h2>Install Node.js</h2>
+            <p>TypeScript requires Node.js to run. If Node.js is not installed on your system, download and install it:</p>
+            <ul>
+                <li>Visit the <a href="https://nodejs.org/" target="_blank">Node.js download page</a>.</li>
+                <li>Download and install the <strong>LTS</strong> version, which is recommended for most users.</li>
+            </ul>
+        </li>
+
+        <li>
+            <h2>Verify Node.js and npm Installation</h2>
+            <p>After installation, verify that Node.js and npm (Node Package Manager) are installed by running the following commands in your terminal or command prompt:</p>
+            <pre><code>node -v
+npm -v</code></pre>
+            <p>These commands should return version numbers.</p>
+        </li>
+
+        <li>
+            <h2>Install TypeScript Globally</h2>
+            <p>Install TypeScript globally using npm:</p>
+            <pre><code>npm install -g typescript</code></pre>
+            <p>This makes the <code>tsc</code> (TypeScript compiler) command available system-wide.</p>
+        </li>
+
+        <li>
+            <h2>Verify TypeScript Installation</h2>
+            <p>To confirm that TypeScript has been installed, check the version:</p>
+            <pre><code>tsc -v</code></pre>
+            <p>This will return the installed TypeScript version, e.g., <code>Version 5.0.0</code>.</p>
+        </li>
+
+        <li>
+            <h2>Set Up a TypeScript Project</h2>
+            <p>To use TypeScript in a project:</p>
+            <ul>
+                <li>Create a new project directory:</li>
+                <pre><code>mkdir my-typescript-project
+cd my-typescript-project</code></pre>
+                <li>Initialize a TypeScript configuration file:</li>
+                <pre><code>tsc --init</code></pre>
+                <p>This will generate a <code>tsconfig.json</code> file, which can be customized to configure TypeScript for your project.</p>
+            </ul>
+        </li>
+
+        <li>
+            <h2>Compile a TypeScript File</h2>
+            <ul>
+                <li>Create a TypeScript file, e.g., <code>index.ts</code>:</li>
+                <pre><code>echo "let message: string = 'Hello, TypeScript!'; console.log(message);" > index.ts</code></pre>
+                <li>Compile it into JavaScript:</li>
+                <pre><code>tsc index.ts</code></pre>
+                <li>Run the compiled JavaScript file:</li>
+                <pre><code>node index.js</code></pre>
+            </ul>
+        </li>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common TypeScript Translators</title>
+</head>
+<body>
+    <h1>Three Most Common TypeScript Translators</h1>
+    
+    <ol>
+        <li>
+            <h2>TypeScript Compiler (<code>tsc</code>)</h2>
+            <p><strong>Purpose:</strong> The official compiler provided by the TypeScript package, used to translate TypeScript into JavaScript and perform type checking.</p>
+            <p><strong>Why It's Common:</strong> It's straightforward, reliable, and directly supports all TypeScript features.</p>
+            <p><strong>Usage:</strong></p>
+            <pre><code>tsc file.ts</code></pre>
+        </li>
+
+        <li>
+            <h2>Babel</h2>
+            <p><strong>Purpose:</strong> A JavaScript compiler that can transpile TypeScript into JavaScript using the <code>@babel/preset-typescript</code> plugin.</p>
+            <p><strong>Why It's Common:</strong> Often used in modern web development workflows, especially when integrated with bundlers like Webpack or Rollup for optimized builds. It is faster but doesn't perform type checking (type checking can be done separately with <code>tsc</code>).</p>
+            <p><strong>Usage:</strong></p>
+            <pre><code>npx babel file.ts --out-file file.js</code></pre>
+        </li>
+
+        <li>
+            <h2>SWC (Speedy Web Compiler)</h2>
+            <p><strong>Purpose:</strong> A fast, Rust-based compiler for JavaScript and TypeScript, focused on speed and efficiency.</p>
+            <p><strong>Why It's Common:</strong> Gaining popularity in modern build tools like Vite and Next.js for its blazing-fast performance, particularly in large-scale projects. Like Babel, it doesn’t perform type checking.</p>
+            <p><strong>Usage:</strong></p>
+            <pre><code>npx swc file.ts -o file.js</code></pre>
+        </li>
+    </ol>
+</body>
+</html>
