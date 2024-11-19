@@ -1,0 +1,107 @@
+<!-- Author: Martin Guzman -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../css/duckTypingExample.css">
+        <meta charset="UTF-8">
+        <title>Duck Typing Example</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>Website For The TypeScript Language</h1>
+            <h2>CS-354 Programming Languages</h2>
+            <nav>
+                <!--Insert links to website pages into the 'href' value.-->
+                <h1>Website Pages:</h1>
+                <a href="#">Home</a>
+                <a href="../html/HistoryOfTypescript.html">History of TypeScript</a>
+                <a href="../html/InstallationAndTranslators.html">TypeScript Setup Help</a>
+                <a href="../html/Resources.html">General Resources</a>
+                <a href="../html/hello.html">Example 1: Hello World</a>
+                <a href="../html/zella.html">Example 2: TypeScript Typing</a>
+                <a href="../html/EvenOdd.html">Example 3: Even-Odd</a>
+                <a href="../html/Fibonacci.html">Example 2: Fibonacchi</a>
+                <a href="../html/DuckTyping.html">Example 3: Limited Duck Typing</a>
+                <a href="../html/mash.html">Example 4: M.A.S.H</a>
+                <a href="../html/Presley.html">Example 5: The Edit Distance Problem</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>A TypeScript Example of using Self-Imposed Limits in Duck Typing</h1>
+                <p>This example reviews th unique ability of TypeScript to make duck typing safer, given self-imposed source code conventions. In JavaScript, duck typing is one method for type checking.</p>
+
+            <h2>Problem Statement:</h2>
+                <p>We need to validate a list of animals and what charcteristics they have. We may have a mixture of attributes we will always mandate and attributes we don't need to mandate.</p>
+
+            <h2>TypeScript Implementation</h2>
+            <h3>Code with Errors Detected</h3>
+                <pre><code>
+// Define which variables allow/disallow duck typing in this interface.
+interface Duck {
+    bill: string
+    uniqueType: any
+}
+
+class MallardDuck implements Duck {
+    bill: string;
+    uniqueType: number;
+
+    constructor(billColor: string, num: number) {
+        this.bill = billColor;
+        this.uniqueType = num;
+    }
+}
+
+class DomesticDuck implements Duck {
+    bill: string;
+    uniqueType: boolean;
+
+    constructor(billColor: string, bool: boolean) {
+        this.bill = billColor;
+        this.uniqueType = bool;
+    }
+}
+
+class Customer {
+    bill: number;
+    uniqueType: string;
+
+    constructor(dollars: number, name: string) {
+        this.bill = dollars;
+        this.uniqueType = name;
+    }
+}
+
+// Use TypeScript's developer-imposed duck typing in thsi function.
+function DuckToString(duck: Duck) :string {
+    var duckStr = "Duck bill color: "+duck.bill +"\n";
+        duckStr += "UniqueType: "+duck.uniqueType+"\n";
+    return duckStr;
+}
+
+
+
+
+
+/* Display an instance of self-imposed duck typing limit error handling (Caught during compile time!). */
+let duck1 = new MallardDuck("orange", 2002);
+let duck2 = new DomesticDuck("yellow", true);
+let customer1 = new Customer(20.00, "Manny");
+const duckList = [duck1, duck2, customer1];
+
+for(let i=0; i < duckList.length; i++) {
+    // Compiler Error: DuckToString() will not accept an object not fitting the Duck interface!
+    console.log(DuckToString(duckList[i]) + "\n\n");
+}
+                </code></pre>
+
+            <h4>Terminal Result</h4>
+                <p></p>
+
+
+            <script src="../js/Martin.js"></script>
+        </main>
+    </body>
+</html>
