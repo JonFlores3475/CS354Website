@@ -56,8 +56,9 @@ function DuckToString(duck: Duck) :string {
 let duck1 = new MallardDuck("orange", 2002);
 let duck2 = new DomesticDuck("yellow", true);
 let customer1 = new Customer(20.00, "Manny");
-const duckList = [duck1, duck2];
+const duckList = [duck1, duck2, customer1];
 
 for(let i=0; i<duckList.length; i++) {
+    // Compiler Error: DuckToString() will not accept an object not fitting the Duck interface!
     console.log(DuckToString(duckList[i]) + "\n\n");
 }
