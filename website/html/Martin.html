@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../css/Martin.css">
+        <meta charset="UTF-8">
+        <title>Martin's Example</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>Language Website: TypeScript</h1>
+            <h2>CS-354 Programming Languages</h2>
+            <nav>
+                <!--Insert links to website pages into the 'href' value.-->
+                <h1>Website Pages:</h1>
+                <a href="#">Home</a>
+                <a href="../html/HistoryOfTypescript.html">History of TypeScript</a>
+                <a href="../html/InstallationAndTranslators.html">TypeScript Setup Help</a>
+                <a href="../html/LinksToResources.html">General Resources</a>
+                <a href="../html/hello.html">Example 1: Hello World</a>
+                <a href="../html/zella.html">Example 2: TypeScript Typing</a>
+                <a href="../html/EvenOdd.html">Example 3: Even-Odd</a>
+                <a href="../html/Fibonacci.html">Example 2: Fibonacchi</a>
+                <a href="../html/Martin.html">Example 3: Limited Duck Typing</a>
+                <a href="../html/mash.html">Example 4: M.A.S.H</a>
+                <a href="../html/Presley.html">Example 5: The Edit Distance Problem</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Example of Limited Duck Typing:</h1>
+                <p>This example reviews the unique implementation of duck typing in TypeScript. Ordinarily, JavaScript would allow any free usage of duck typing with no error checking during compilation-time. However, with TypeScript's gradual typing system, we can swap between strict vs loose typing as it benefits us. This can allow for unique source code as seen below:</p>
+
+            <h2>Problem Statement:</h2>
+                <p>We need to validate a list of animals and what charcteristics they have. We may have a mixture of attributes we will always mandate and attributes we don't need to mandate.</p>
+
+            <h2>TypeScript Implementation:</h2>
+                <pre><code>
+
+                    class MallardDuck {
+                        bill: string;
+                        uniqueDataType: number;
+                    
+                        constructor(billColor: string, numberDataType: number) {
+                            this.bill = billColor;
+                            this.uniqueDataType =numberDataType;
+                        }
+                    }
+                    
+                    class DomesticDuck {
+                        bill: string;
+                        uniqueDataType: boolean;
+                    
+                        constructor(billColor: string, booleanDataType: boolean) {
+                            this.bill = billColor;
+                            this.uniqueDataType = booleanDataType;
+                        }
+                    }
+                    
+                    class RestaurantCustomer {
+                        bill: number;
+                        uniqueDataType: string;
+                    
+                        constructor(dollars: number, name: string) {
+                            this.bill = dollars;
+                            this.uniqueDataType = name;
+                        }
+                    }
+                    
+                    
+                    /* Now, attempt to validate info about given items! */
+                    let item1 = new MallardDuck("orange", 2002);
+                    let item2 = new DomesticDuck("yellow", true);
+                    let item3 = new RestaurantCustomer(20.00, "Manny");
+                    
+                    const itemList = [item1, item2, item3];
+                    
+                    
+                    for(let i=0; i<itemList.length; i++) {
+                        try {
+                            let stringToPrint: string = "Duck bill color: " + itemList[i].bill + ", the duck's unique attribute: " + itemList[i].uniqueDataType;
+                            console.log(stringToPrint);
+                        } catch (error) {
+                            console.log("Error: Invalid data typing! Bill must be a string!")
+                        }
+                    }
+
+
+                </code></pre>
+
+            <h2>Input</h2>
+                <p></p>
+
+            <h2>Output:</h2>
+                <p></p>
+
+
+            <script src="../js/Martin.js"></script>
+        </main>
+    </body>
+</html>
