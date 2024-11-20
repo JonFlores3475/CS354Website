@@ -8,25 +8,9 @@
     </head>
 
     <body>
-        <header>
-            <h1>Website For The TypeScript Language</h1>
-            <h2>CS-354 Programming Languages</h2>
-            <nav>
-                <!--Insert links to website pages into the 'href' value.-->
-                <h1>Website Pages:</h1>
-                <a href="#">Home</a>
-                <a href="../html/LanguageBackground.html">History of TypeScript</a>
-                <a href="../html/TechnicalSetup.html">TypeScript Setup Help</a>
-                <a href="../html/Resources.html">General Resources</a>
-                <a href="../html/helloWorldExample.html">Example 1: Hello World</a>
-                <a href="../html/typeUsageExample.html">Example 2: TypeScript Typing</a>
-                <a href="../html/evenOddExample.html">Example 3: Even-Odd</a>
-                <a href="../html/fibonacciExample.html">Example 2: Fibonacchi</a>
-                <a href="../html/duckTypingExample.html">Example 3: Limited Duck Typing</a>
-                <a href="../html/mashExample.html">Example 4: M.A.S.H</a>
-                <a href="../html/editDistanceExample.html">Example 5: The Edit Distance Problem</a>
-            </nav>
-        </header>
+
+        <header id="app-header"></header>
+        <script async src="globalHeader.js"></script>  
 
         <main>
             <h1>A TypeScript Example of using Self-Imposed Limits in Duck Typing</h1>
@@ -36,7 +20,8 @@
                 <p>We need to validate a list of animals and what charcteristics they have. We may have a mixture of attributes we will always mandate and attributes we don't need to mandate.</p>
 
             <h2>TypeScript Implementation</h2>
-            <h3>Code with Errors Detected</h3>
+            The following is an example of using types to allow duck typing only when desired. In this case, we can choose to make a certain attribute static (such as an ID vital for database formatting) or dynamic for duck typing (such as when we expect the input data types to be unpredictable in structure over time).
+            <h3>'duckTypingExampleWithCompilerError.ts'</h3>
                 <pre><code>
 // Define which variables allow/disallow duck typing in this interface.
 interface Duck {
@@ -83,8 +68,6 @@ function DuckToString(duck: Duck) :string {
 
 
 
-
-
 /* Display an instance of self-imposed duck typing limit error handling (Caught during compile time!). */
 let duck1 = new MallardDuck("orange", 2002);
 let duck2 = new DomesticDuck("yellow", true);
@@ -98,7 +81,20 @@ for(let i=0; i < duckList.length; i++) {
                 </code></pre>
 
             <h4>Terminal Result</h4>
-                <p></p>
+                <pre><code>
+$ tsc duckTypingExampleWithCompilerError.ts
+duckTypingExampleWithCompilerError.ts:63:30 - error TS2345: Argument of type 'MallardDuck | DomesticDuck | Customer' is not assignable to parameter of type 'Duck'.    
+  Type 'Customer' is not assignable to type 'Duck'.
+    Types of property 'bill' are incompatible.
+      Type 'number' is not assignable to type 'string'.
+
+63     console.log(DuckToString(duckList[i]) + "\n\n");
+                                ~~~~~~~~~~~
+
+
+Found 1 error in duckTypingExampleWithCompilerError.ts:63
+
+                </code></pre>
 
 
             <script src="../js/Martin.js"></script>
