@@ -31,6 +31,7 @@
             padding: 15px;
             border-radius: 5px;
             overflow-x: auto;
+            text-align: left;
         }
         code {
             color: #66d9ef;
@@ -43,8 +44,8 @@
 </head>
 <body>
 
-  <header id="app-header"></header>
-  <script async src="globalHeader.js"></script>  
+<header id="app-header"></header>
+<script async src="globalHeader.js"></script>
 
 <h1>🎲 MASH Game 🎲</h1>
 <p id="counter">Counter: 1</p>
@@ -56,24 +57,70 @@
 
 <h2>Solution in TypeScript</h2>
 <pre><code>
-    // Categories
-    const categories = { home, spouse, car, career, kids, salary };
+// Define categories and their respective options.
+const categories: { [key: string]: string[] } = {
+    home: ["Mansion", "Apartment", "Shack", "House"],
+    spouse: ["Taylor Swift", "Chris Hemsworth", "Zendaya", "Ryan Reynolds", "Emma Watson", "Tom Holland", "Scarlett Johansson", "Keanu Reeves"],
+    car: ["Tesla", "Bicycle", "Motorcycle", "Bus", "Ferrari", "Skateboard", "SUV", "Horse"],
+    career: ["Doctor", "Engineer", "Artist", "Teacher", "Chef", "Pilot", "Actor", "Scientist"],
+    kids: ["0", "1", "2", "3", "4", "5+"],
+    salary: ["$30,000/year", "$50,000/year", "$75,000/year", "$100,000/year", "$200,000/year", "Infinite Riches"]
+};
 
-    // Function to eliminate options using a "magic number"
-    function eliminateCategory(options: string[], number: number): string {
-      let index = 0;
-      while (options.length > 1) {
+function eliminateCategory(options: string[], number: number): string {
+    let index = 0;
+    while (options.length > 1) {
         index = (index + number - 1) % options.length;
         options.splice(index, 1);
-      }
-      return options[0];
+    }
+    return options[0];
+}
+
+function startCounter(): void {
+    const counterElement = document.getElementById("counter")!;
+    const stopButton = document.getElementById("stopButton") as HTMLButtonElement;
+    const resultsElement = document.getElementById("results")!;
+    let count = 0;
+    let interval: number | undefined;
+
+    function resetGame() {
+        resultsElement.innerHTML = "";
+        counterElement.textContent = "Counter: 1";
+        stopButton.disabled = false;
+        startCounter();
     }
 
-    // Counter logic and reset
-    function startCounter() {
-      // Counter and button logic...
-    }
-  </code></pre>
+    interval = setInterval(() => {
+        count = (count % 10) + 1;
+        counterElement.textContent = `Counter: ${count}`;
+    }, 500) as unknown as number;
+
+    stopButton.addEventListener("click", () => {
+        if (interval !== undefined) clearInterval(interval);
+        counterElement.textContent = `Counter stopped at: ${count}`;
+
+        const results: Record<string, string> = {};
+        for (const [category, options] of Object.entries(categories)) {
+            results[category] = eliminateCategory([...options], count);
+        }
+
+        let resultHTML = "<h2>Your Future:</h2>";
+        for (const [category, result] of Object.entries(results)) {
+            resultHTML += `<p><strong>${category.charAt(0).toUpperCase() + category.slice(1)}:</strong> ${result}</p>`;
+        }
+        resultHTML += `<button id="playAgainButton">Play Again</button>`;
+        resultsElement.innerHTML = resultHTML;
+
+        stopButton.disabled = true;
+
+        document.getElementById("playAgainButton")!.addEventListener("click", resetGame);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    startCounter();
+});
+</code></pre>
 
 <h2>Input/Output:</h2>
 <pre>Input: Counter stopped at 7</pre>
@@ -84,7 +131,7 @@
     "Career": "Teacher",
     "Kids": 4,
     "Salary": "$200,000/year"
-  </pre>
+</pre>
 
 <script src="../js/mash.js"></script>
 </body>
